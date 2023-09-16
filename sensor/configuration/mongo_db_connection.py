@@ -1,6 +1,6 @@
 import pymongo
 from sensor.constant.database import DATABASE_NAME
-
+from sensor.constant.env_variable import MONGODB_URL_KEY
 import certifi
 import os
 ca = certifi.where()
@@ -11,7 +11,7 @@ class MongoDBClient:
         try:
 
             if MongoDBClient.client is None:
-                mongo_db_url = "mongodb+srv://abk:abk@cluster0.tikde9j.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp"
+                mongo_db_url = os.getenv(MONGODB_URL_KEY)
                 print(mongo_db_url)
                 if "localhost" in mongo_db_url:
                     MongoDBClient.client = pymongo.MongoClient(mongo_db_url) 
